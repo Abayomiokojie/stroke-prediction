@@ -31,6 +31,8 @@ project, the dataset you have chosen to use, and any risks or unknowns you have 
 - Mapping the Landscape of Stroke Risk: A Characterization Study
 
 
+## CHOSEN DATASET: Stroke Prediction Dataset
+- URL: https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset
 
 ## Project Overview
 -  Purpose and Overview
@@ -40,43 +42,39 @@ project, the dataset you have chosen to use, and any risks or unknowns you have 
 This project has as goal to analyze and visualize the stroke prediction dataset to obtain a target model of individuals most at risk of suffering from a stroke to develop effective preventative measures/campaigns to reduce the prevalence of stroke.
 
 ### Business Problem
-We are a group of data scientists concerned about the high mortality and disability associated with stroke. In Canada, it is the third leading cause of death and the tenth largest contributor to disability-adjusted life years (the number of years lost due to ill health, disability, or early death)(1). It impacts health system costs, the workforce, and society. Our job is to characterize individuals at the highest risk of stroke based on demographic and risk factors. This profile will enable the identification of the target population that could benefit from health prevention campaigns, as well as marketing campaigns with industries that develop products associated with health, fitness, and healthy food.
+We are a group of data scientists concerned about the high mortality and disability associated with stroke. In Canada, it is the third leading cause of death and the tenth largest contributor to disability-adjusted life years (the number of years lost due to ill health, disability, or early death)(1). It impacts health system costs, the workforce, and society. 
+
+Our job is to characterize individuals at the highest risk of stroke based on demographic and risk factors. This profile will enable the identification of the target population that could benefit from health prevention campaigns, as well as marketing campaigns with industries that develop products associated with health, fitness, and healthy food.
+
 We worked with the Stroke Prediction Dataset ((it is possible, insert the link here), which is public through kaggle. It consists of 5.110 observations with 11 attributes between demographic  and possible risk factors like health comorbidities and lifestyle information, including the variable ‘stroke’ which is  1 if the patient had a stroke or 0 if not. 
 
 After a preliminary analysis of the dataset we classify the attributes (columns)  in four big groups defined as: 
-Immutable demographic characteristics: Demographic characteristics that are not changeable like gender and age.
-Mutable demographic characteristics: Demographic characteristics that are potentially changeable like marital status, work and residence type.
-Immutable Risk: aspects related to the individual that could be related with major risk of stroke and  are not alterable like  chronic comorbidities: heart disease and  hypertension.
-Mutable Risk Factors: aspects related to the individual lifestyle that could be related with major risk of stroke and  are alterable like  average glucose level, body mass index and smoking status.
+- Immutable demographic characteristics: Demographic characteristics that are not changeable like gender and age.
+- Mutable demographic characteristics: Demographic characteristics that are potentially changeable like marital status, work and residence type.
+- Immutable Risk: aspects related to the individual that could be related with major risk of stroke and  are not alterable like  chronic comorbidities: heart disease and  hypertension.
+- Mutable Risk Factors: aspects related to the individual lifestyle that could be related with major risk of stroke and  are alterable like  average glucose level, body mass index and smoking status.
 
 #### Name of Columns:
- - id: unique identifier
-- stroke: 1 if the patient had a stroke or 0 if not
+1) id: unique identifier
+2) gender: "Male", "Female" or "Other"
+3) age: age of the patient
+4) hypertension: 0 if the patient doesn't have hypertension, 1 if the patient has hypertension
+5) heart_disease: 0 if the patient doesn't have any heart diseases, 1 if the patient has a heart disease
+6) ever_married: "No" or "Yes"
+7) work_type: "children", "Govt_jov", "Never_worked", "Private" or "Self-employed"
+8) Residence_type: "Rural" or "Urban"
+9) avg_glucose_level: average glucose level in blood
+10) bmi: body mass index
+11) smoking_status: "formerly smoked", "never smoked", "smokes" or "Unknown"*
+12) stroke: 1 if the patient had a stroke or 0 if not
+*Note: "Unknown" in smoking_status means that the information is unavailable for this patient
 
-##### Immutable demographic characteristics:
-- gender: "Male", "Female" or "Other"
-- age: age of the patient
 
-##### Mutable demographic characteristics:
- - ever_married: "No" or "Yes"
- - work_type: "children", "Govt_jov", "Never_worked", "Private" or "Self-employed"
- - Residence_type: "Rural" or "Urban"
-
-##### Immutable Risk Factors:
- - hypertension: 0 if the patient doesn't have hypertension, 1 if the patient has hypertension
-- heart_disease: 0 if the patient doesn't have any heart diseases, 1 if the patient has a heart disease 
-
-##### Mutable Risk Factors:
-- avg_glucose_level: average glucose level in blood
--  bmi: body mass index
--  smoking_status: "formerly smoked", "never smoked", "smokes" or "Unknown"
 
 
 
 
 ## METHODOLOGY
-### CHOSEN DATASET: Stroke Prediction Dataset
-
 
 ### DATASET CLEANING:
 Exploration of  Types of data in the dataset to standardize it. Handle missing values, removing inconsistencies and ensuring data readiness. 
@@ -131,27 +129,29 @@ Exploration of  Types of data in the dataset to standardize it. Handle missing v
 - Where worked people with stroke? 
 - How many has HTA
 - How many has heart_disease
-- Glucose average: min value is 55, max value is 271, we can’t take the mean, we could separated in groups: to take in consideracion, aleatory glucose test  in value more than 200 mg/dl is diagnosis of Diabetes, therefore it is other comorbidity (we need to consider that in the analysis, it is another risk factor, sometimes patients arrive ‘without chronic diseases’ but they have it underdiagnosticated several time ago, I suggest this groups according with the American society of diabetes:  
-100 or less
-101 to 150
-151 to 199
-More than 200 mg/dl Diabetes.
+- Glucose average: 
+	- min value is 55, max value is 271, we can’t take the mean, 
+	- we could separated in groups: to take in consideracion, aleatory glucose test  in value more than 200 mg/dl is diagnosis of Diabetes, therefore it is other comorbidity (we need to consider that in the analysis, it is another risk factor, sometimes patients arrive ‘without chronic diseases’ but they have it underdiagnosticated several years ago
+	-  I suggest this groups according with the American society of diabetes:  
+		- 140 mg/dl or less (use to be a normal value)
+		- 141 to 199 mg/dl  (prediabetes or oral glucose intolerance)
+		- More than 200 mg/dl Diabetes.
 
 - BMI: min value 10.3 and max value 97.6
-We can use de BMI classification from the CDC: 
-<18.5: Underweight
-18.5>25 Healthy Weight
-25>=30: Overweight
->= 30 Obesity
- 30 to 35 Obesity class 1
-35 to 40 Obesity class 2
- >=40 Obesity class 3 (severe Obesity
+	- We can use de BMI classification from the CDC: 
+		- <18.5: Underweight
+		- 18.5>25 Healthy Weight
+		- 25>=30: Overweight
+		- >= 30 Obesity
+		- 30 to 35 Obesity class 1
+		- 35 to 40 Obesity class 2
+		- >=40 Obesity class 3 (severe Obesity)
 
 - Stroke and smoke: 
-“formerly smoked"
- "never smoked"
-"smokes" 
-"Unknown
+	- “formerly smoked"
+	- "never smoked"
+	- "smokes" 
+	- "Unknown
 
 
 
@@ -166,16 +166,16 @@ We can use de BMI classification from the CDC:
 
 ## TECHNICAL STACK: 
 ### Programming Language:
-Python
-SQL???
+- Python
+- SQL???
 
 ### Libraries Used
-Numpy: matrix operations
-Pandas: data analysis
-Matplotlib: creating graphs and plots
-Plotly: creating graphs and plots
-Seaborn: enhancing matplotlib plots
-SKLearn: classification analysis
+- Numpy: matrix operations
+- Pandas: data analysis
+- Matplotlib: creating graphs and plots
+- Plotly: creating graphs and plots
+- Seaborn: enhancing matplotlib plots
+- SKLearn: classification analysis
 
 ## PROJECT SCOPE
 	Description:
@@ -195,14 +195,14 @@ SKLearn: classification analysis
 
 ## Understanding the Data:
 
-What value does your project bring to the industry?
-How will you answer your business question with your chosen dataset?
-What are the risks and uncertainties?
-What methods and technologies will you use?
+- What value does your project bring to the industry?
+- How will you answer your business question with your chosen dataset?
+- What are the risks and uncertainties?
+- What methods and technologies will you use?
 
 ## Next Task: 
-Clean and standardize the data
-Preliminary visualization of the correlation between the variables
+- Clean and standardize the data
+- Preliminary visualization of the correlation between the variables
 
 
 ----
