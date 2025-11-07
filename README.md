@@ -1,16 +1,18 @@
-# stroke-prediction
+# Stroke Risk Stratification: Identifying Vulnerable Individuals through Data Visualization. 
 Predicting the occurence of stroke in individuals using demographic and health-related factors
 
+### Type of project: Data Storytelling and Visualization Project.
 
-## GITHUB REPO:
+
+## GitHub Repo:
 https://github.com/Abayomiokojie/stroke-prediction.git
 
-### Data Science Project Notebook: 
-
 ### Expectations for Week 1
-After Week 1, you will be evaluated on your project's README file. By this point, it must
-include a detailed project proposal. This should include the business motivation for your
-project, the dataset you have chosen to use, and any risks or unknowns you have identified.
+After Week 1, you will be evaluated on your project's README file. By this point, it must include a 
+- detailed project proposal. 
+- business motivation for your project, 
+- the dataset you have chosen to use, 
+-  any risks or unknowns you have identified.
 
 
 ## Data Science Institute- Cohort 7- Team DS3 - Final Project
@@ -19,27 +21,27 @@ project, the dataset you have chosen to use, and any risks or unknowns you have 
 - Joshua Okojie	
 - Lindsay Hudson
 - Mariluz Lopez Zamora
-- Yunpeng Wang
 
 
-## RepoTitle: Stroke Prediction
-### README Title options: 
-- Stroke Risk Stratification: Identifying Vulnerable Individuals through Data Visualization. 
+### README Title other options: 
 - Profiling Individuals at Risk of Stroke: A Data-Driven Approach
 - Characterization of Stroke Risk Populations: Clinical and Demographic Insights
 - Understanding Stroke Risk: Patterns, Predictors, and Profiles
 - Mapping the Landscape of Stroke Risk: A Characterization Study
 
 
-## CHOSEN DATASET: Stroke Prediction Dataset
+## Chosen Dataset: Stroke Prediction Dataset
 - URL: https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset
 
 ## Project Overview
 -  Purpose and Overview
+- Methodology
 -  Exploratory Data Analysis
+- Findings and Visualization Analysis
+- References
 
 ## Purpose and Overview
-This project has as goal to analyze and visualize the stroke prediction dataset to obtain a target model of individuals most at risk of suffering from a stroke to develop effective preventative measures/campaigns to reduce the prevalence of stroke.
+This project has as goal to analyze and visualize the stroke prediction dataset to obtain a target model of individuals most at risk of suffering from a stroke. The goal is to develop effective preventive measures and campaigns to reduce the prevalence of stroke.
 
 ### Business Problem
 We are a group of data scientists concerned about the high mortality and disability associated with stroke. In Canada, it is the third leading cause of death and the tenth largest contributor to disability-adjusted life years (the number of years lost due to ill health, disability, or early death)(1). It impacts health system costs, the workforce, and society. 
@@ -73,7 +75,6 @@ After a preliminary analysis of the dataset we classify the attributes (columns)
 
 
 
-
 ## METHODOLOGY
 
 ### DATASET CLEANING:
@@ -99,52 +100,69 @@ Exploration of  Types of data in the dataset to standardize it. Handle missing v
 #### IDENTIFIED RISK AND UNKNOWNS AND RESOLVE MISSING VALUES:
 
 ##### Missing Values:
-- dataset contains some N/A values in bmi, and unknowns in smoking_status column (data unavailable for patient). How are we going to handle them
+- It was found some 'N/A' values in 'bmi' column, and 'unknowns' in 'smoking_status' column (data unavailable for patient). 
+- After careful consideration and analysis, and taking into account the different types of data each column provides, we handle them as follows:
+	- BMI missing values (NaN) represent 201 observations, which corresponds to 4% of the dataset. This is within the acceptable range for using imputation with minimal risk to the dataset.
 
- - bmi missing values: NaN: 201 (4% of dataset - this is within the acceptable range for using imputation with minimal risk to dataset),  with min value 10.3 and max value 97.6, and mean of 28.8: Data imputation with KNN. We should think about scaling the numerical data before using KNN for imputation.
+		However, the BMI column has a minimum value of 10.3 and a maximum value of 97.6, with a mean of 28.8. Because of the large gap between these values, we decided to handle the missing data in this column through imputation using KNN.
 
- -  smoking_status: Unknown: 1544 (30% of dataset - with missing data over 10% being associated with bias in the statistical analysis, more advanced methods of imputation being required for larger percentages of missing data, and the data being missing not at random (MNAR) due to the nature of the willingness of respondents to disclose their smoking status, we decided not to use imputation for such a large portion of our dataset). Only 3 options: never smoked, formerly smoked, and smokes. Unknown be used as a 4th category. (Missing data will be its own category).
+		We should scale the numerical data before applying KNN for imputation.
+
+	- The smoking_status value “Unknown” represents 1,544 observations, which corresponds to 30% of the dataset. In addition, this attribute only allows three answer options: never smoked, formerly smoked, and smokes.
+	
+		Since missing data greater than 10% can introduce bias into statistical analysis, and more advanced imputation methods are usually required for larger percentages of missing data, we decided not to use imputation in this case. Furthermore, the data is considered Missing Not at Random (MNAR) because it depends on the respondents’ willingness to disclose their smoking status.
+
+		Therefore, missing data will be treated as its own category, with “Unknown” used as a fourth category.
 
 
-- Residence column title is capitalized while other columns are not
+##### Standardization:
+- Residence column title is capitalized while other columns are not.
 - work_type strings need to be standardized as capitalized or not
 - smoking_status strings need to be standardized as capitalized or not
-- do float types (avg_glucose and bmi) need to be standardized in terms of the number of decimal places (one has two places, the other has one place)?
+- do float types (avg_glucose, age and bmi) need to be standardized in terms of the number of decimal places (one has two places, the other has one place).
 - do we need to scale numerical data (especially before using KNN for imputation?
-- There are potential  biases?,if somebody finds one, write it here.
-- Think about the ethical part in insurance 
+
+
+##### Ethical considerations:
+- 
 
 
 
-## Data Exploration: 
+### Data Exploration: 
 
-### Identifying correlations: Preliminary visualization of data to understand patterns, correlations and data distribution.
+#### Identifying correlations: Preliminary visualization of data to understand patterns, correlations and data distribution.
 - How many observations with stroke we have? (insert the first graphic)
-- After extract the observations with stroke we figuraud a big imbalances int he dataset, we only found: 249 obervations with stroke plus 40 observation with stroke with smoking status unknown. 
-- In adition, the big difrence between the BMI values, with  min value 10.3 and max value 97.6, made difficult the visualization of the correlation stroke vs. BMI, for this reason we used the BMI classification from the CDC:
+
+- After extract the observations with stroke we figuraud a big imbalances in the dataset, we only found: 249 obervations with stroke 
+- In adition, the big difrence between the BMI values, with  min value 10.3 and max value 97.6, made difficult the visualization of the correlation Stroke vs. BMI, for this reason we used the BMI classification from the CDC:
 	- <18.5: Underweight
 	- 18.5>25 Healthy Weight
 	- 25>=30: Overweight
 	- => 30 Obesity
-- The big diference between average glucose level with min value in 55, and max value in 271, was an issue as well, we decide to use the American Diabetes Asociation  clasificationes:  
+- The big diference between average glucose level with min value in 55, and max value in 271, was an issue as well, we decide to use the American Diabetes Asociation  clasification:  
 	- 140 mg/dl or less:  normal value.
 	- 141 to 199 mg/dl: prediabetes or oral glucose intolerance.
 	- More than 200 mg/dl: Diabetes.
 
+## Findings and Analysis
+
 ### Demographic Characterization of patients with stroke: 
 
 - Immutable demographic characteristics: 
-	- Gender: From our--- observations of stroke, ---% of them was men and ---% was women.
-	- Age: we couls observed a increase of stroke incidence after 58 years old with a peak after 78 years  old.
+	- Gender: From our 249 observations of stroke, ---% of them was men and ---% was women.
+	- Age: we could observed a increase of stroke incidence after 58 years old with a peak after 78 years  old.
+	¿how many people over 58 years old is married? and how many is single?
 
 - Mutable demographic characteristics: 
-	- Marital status: --% was married and --% was unmarried
+	- Marital status: --% was married and --% was unmarried, however, --% of stroke observation had more than--years old, therefore, it is an inbalance of categorie and is dificult to make a conclution here. 
+
 	- Setting: --% living in urban setting and --%  in city	
 	- Type of work: Where worked people with stroke? 
 
 - Immutable Risk: 
 	- HTA: ---% of patients with stroke has HTA,  and % of patients without a stroke  have it. 
 	- Heart_disease --- % of patients with stroke has HTA and % of patientes without stroke have it. 
+	We found that patients with stroke use to have more % of HTA and HD?
 
 
 - Mutable Risk Factors: 
@@ -153,7 +171,8 @@ Exploration of  Types of data in the dataset to standardize it. Handle missing v
 
 	- BMI: Using the BMI clasification from CDC, from patients with stroke,  ---% had Obesity, --% had  Overweight, --% had Healthy Weight and %.. had Underweight, the % of patients without stroke %--- 
 		
-	- Stroke and smoke: 
+	- Stroke and smoke: when we compare the porcentage of patient with stroke who are "smokes and formerly smoked", it is a biger percent of patients without stroke?
+	- to keep in mind: 40 observation with stroke and smoking status unknown. 
 	- “formerly smoked"
 	- "never smoked"
 	- "smokes" 
@@ -170,7 +189,9 @@ Senior 65 and more.
 
 
 
+## Final outcome of the project: model
 
+## 
 
 
 
@@ -216,8 +237,14 @@ Senior 65 and more.
 - Preliminary visualization of the correlation between the variables
 - Made graphics stroke vrs without stroke: HTA, HD, Smoke, Glucose, BMI
 
+## 
+
 ----
 
+## Team member's videos
+- Joshua Okojie	
+- Lindsay Hudson
+- Mariluz Lopez Zamora
 
 
 ## References: 
