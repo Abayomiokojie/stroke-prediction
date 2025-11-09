@@ -122,11 +122,10 @@ Exploration of  Types of data in the dataset to standardize it. Handle missing v
 ##### Missing Values:
 - It was found some 'N/A' values in 'bmi' column, and 'unknowns' in 'smoking_status' column (data unavailable for patient). 
 - After careful consideration and analysis, and taking into account the different types of data each column provides, we handle them as follows:
-	- BMI missing values (NaN) represent 201 observations, which corresponds to 4% of the dataset. This is within the acceptable range for using imputation with minimal risk to the dataset.
+	- BMI missing values (NaN) represent 201 observations, which corresponds to 4% of the dataset. This is within the acceptable range for using imputation with minimal risk to the dataset. Furthermore, the data is considered Missing Not at Random (MNAR) because it depends on the respondents’ willingness to disclose their weight. 
 
-		However, the BMI column has a minimum value of 10.3 and a maximum value of 97.6, with a mean of 28.8. Because of the large gap between these values, we decided to handle the missing data in this column through imputation using KNN.
+		However, the BMI column has a minimum value of 10.3 and a maximum value of 97.6, with a mean of 28.8. Because of the large gap between these values, we decided to handle the missing data in this column through imputation using KNN with a number of neighbords = 9.
 
-		We should scale the numerical data before applying KNN for imputation.
 
 	- The smoking_status value “Unknown” represents 1,544 observations, which corresponds to 30% of the dataset. In addition, this attribute only allows three answer options: never smoked, formerly smoked, and smokes.
 	
@@ -160,7 +159,8 @@ Exploration of  Types of data in the dataset to standardize it. Handle missing v
 	- 25>=30: Overweight
 	- => 30 Obesity
 - The big diference between average glucose level with min value in 55, and max value in 271, was an issue as well, we decide to use the American Diabetes Asociation  clasification:  
-	- 140 mg/dl or less:  normal value.
+	- les tan 70 mg/dl: Low glucosa level
+	- 70 yo 140 mg/dl Healthy Value
 	- 141 to 199 mg/dl: prediabetes or oral glucose intolerance.
 	- More than 200 mg/dl: Diabetes.
 - We used the canadian clasification for age: 
