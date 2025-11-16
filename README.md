@@ -221,8 +221,7 @@ _Note: "Unknown" in smoking_status means that the information is unavailable for
 - Mutable Risk Factors:
 
   ***Glucose average:***
-    ![stroke with gluc](images/Stroke%20Positive%20Visualizations/stroke_patients_by_glucose.png)
-
+    
     - According with the American Society of Diabetes classification, and in base of glucose average, 23% of the patients had an average in the diagnosis range of diabetes that was not reported in the dataset information or used as characteristic, also, 14% had an average of glucose in oral glucose intolerance and  52% have a normal value.
 
 
